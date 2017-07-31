@@ -109,11 +109,14 @@ function dataParse () {
   console.log("Data Parsing");
 
   for (let i = 0; i < formData.length; i++) {
+    //create variables inside the for loop so that they are created every time
     const input = document.createElement("input");
     const FAicon = document.createElement("i");
     const selectform = document.createElement("select");
     const option = document.createElement("option");
     const textarea = document.createElement("textarea");
+
+    // If that determines type
     if (formData[i].type === "select") {
       selectform.setAttribute("name", formData[i].label);
     } else if (formData[i].type === "textarea") {
@@ -124,6 +127,8 @@ function dataParse () {
       fields.appendChild(input);
       input.setAttribute("type", formData[i].type);
     }
+
+    // If statement for the for loop re Select fields.
     if (formData[i].options.length) {
       for (let r = 0; r < formData[i].options.length; r++) {
         const option = document.createElement("option");
@@ -132,11 +137,12 @@ function dataParse () {
         selectform.appendChild(option);
         fields.appendChild(selectform);
       }
+      // Create the default select input.
       option.setAttribute("label", "Select language...")
       option.setAttribute("selected", "selected");
       selectform.appendChild(option);
     }
   }
 }
-
+// Make that form!
 dataParse();
