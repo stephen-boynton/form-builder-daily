@@ -85,16 +85,59 @@ let formData = [
 // HINTS:
 // As you can see, we access the first element in the array
 // with [0] and then grab the property "label" using the "." operator
-( function(){
-  // Select the first element from the array
-  let first = formData[ 0 ];
-  // Log the first object
-  console.log( first );
-  // Log the string "First Name"
-  console.log( first.label );
-} )();
+// ( function(){
+//   // Select the first element from the array
+//   let first = formData[ 0 ];
+//   // Log the first object
+//   console.log( first );
+//   // Log the string "First Name"
+//   console.log( first.label );
+// } )();
 
 
 // -------- Your Code Goes Below this Line --------
 
+// The type property specifies the type attribute of input. In this case, the type is "text."
+// The label property specifies the placeholder text for this input.
+// The id property specifies the value of the id attribute of the input.
+// The icon property specifies the character icon for Font Awesome. This property is used only to complete the hard mode of this project.
+// The options property contains additional information for some of the inputs. The context and type of input should inform how to use this data.
 
+function dataParse () {
+  const fields = document.getElementById("fields");
+
+  console.log("Data Parsing");
+
+  for (let i = 0; i < formData.length; i++) {
+    const input = document.createElement("input");
+    const FAicon = document.createElement("i");
+    const selectform = document.createElement("select");
+    const option = document.createElement("option");
+    const textarea = document.createElement("textarea");
+    if (formData[i].type === "select") {
+      selectform.setAttribute("name", formData[i].label);
+    } else if (formData[i].type === "textarea") {
+      textarea.setAttribute("placeholder", formData[i].label);
+      fields.appendChild(textarea);
+    } else {
+      input.setAttribute("placeholder", formData[i].label);
+      fields.appendChild(input);
+      input.setAttribute("type", formData[i].type);
+    }
+    fields.appendChild(FAicon);
+    if (formData[i].options.length) {
+      for (let r = 0; r < formData[i].options.length; r++) {
+        const option = document.createElement("option");
+        option.setAttribute("label", formData[i].options[r].label);
+        option.setAttribute("value", formData[i].options[r].value);
+        selectform.appendChild(option);
+        fields.appendChild(selectform);
+      }
+      option.setAttribute("label", "Select language...")
+      option.setAttribute("selected", "selected");
+      selectform.appendChild(option);
+    }
+  }
+}
+
+dataParse();
