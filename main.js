@@ -124,7 +124,6 @@ function dataParse () {
       fields.appendChild(input);
       input.setAttribute("type", formData[i].type);
     }
-    fields.appendChild(FAicon);
     if (formData[i].options.length) {
       for (let r = 0; r < formData[i].options.length; r++) {
         const option = document.createElement("option");
